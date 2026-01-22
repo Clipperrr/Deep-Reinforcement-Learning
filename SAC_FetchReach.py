@@ -185,7 +185,7 @@ class SAC:
         # 计算 Actor 损失
         new_actions, log_probs = self.actor.sample(states)
         q1_new, q2_new = self.critic(states, new_actions)
-        actor_loss = (get_alpha() * log_probs - torch.min(q1_new, q2_new)).mean()
+        actor_loss = (get_alpha() * log_probs - torch.min(q1_new, q2_new)).mean()   # -(-get_alpha() * log_probs)
 
         self.actor_optimizer.zero_grad()
         actor_loss_list.append(actor_loss.item())
